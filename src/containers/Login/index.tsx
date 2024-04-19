@@ -51,14 +51,11 @@ const Login: React.FC = () => {
     <div className="py-8 md:py-20 md:flex md:flex-col md:items-center w-100%">
       {loading && <Spinner />}
       <div className=" flex gap-8 flex-col justify-center px-8">
-        <div className="">
+        <div>
           <Logo />
         </div>
         <div>
-          <h2 className="font-bold mb-3 text-3xl">LOGIN</h2>
-          <p className="text-xs italic text-slate-400">
-            Login to enjoy full experience
-          </p>
+          <h2 className="font-bold mb-3 text-3xl">ADMIN LOGIN</h2>
         </div>
         <div className="flex flex-col gap-3 md:w-[150%]">
           <label htmlFor="email">Email Address:</label>
