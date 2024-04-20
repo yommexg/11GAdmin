@@ -8,6 +8,9 @@ import MobileSidebar from "./mobileSidebar";
 
 import Logo from "../../utils/logo";
 import { scrollToTop } from "../../utils/scrollToTop";
+import { FaBell } from "react-icons/fa";
+
+const noAvatar = new URL("../../assets/noAvatar.png", import.meta.url).href;
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,18 +30,27 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div className="md:ml-[250px] py-5 md:px-4 bg-white shadow-lg">
+    <div className="md:ml-[250px] py-5 md:py-8 px-4 bg-white shadow-lg">
       <div className="flex items-center justify-between md:hidden ">
-        <div className="mx-2 flex gap-2 items-center">
-          <MobileSidebar
-            isMenuOpen={isMenuOpen}
-            toggleMenu={toggleMenu}
-            scrollToTop={mobileScrollToTop}
+        <MobileSidebar
+          isMenuOpen={isMenuOpen}
+          toggleMenu={toggleMenu}
+          scrollToTop={mobileScrollToTop}
+        />
+        {!isMenuOpen && <Logo />}
+        <div className="cursor-pointer flex items-center gap-8">
+          <img
+            src={userData.avatar ? userData.avatar : noAvatar}
+            alt={userData.username}
+            className="h-10 w-10 rounded-full"
           />
-          {!isMenuOpen && <Logo />}
-          {userData.status}
+          <div className="relative">
+            <FaBell size={25} />
+            <p className="absolute -top-4 right-0 text-red-500 font-semibold">
+              0
+            </p>
+          </div>
         </div>
-        {/* <div>profile, not, theme</div> */}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ import Settings from "./containers/Settings";
 import { useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
 import Users from "./containers/Users";
+import Notification from "./containers/Notifications";
 
 interface JwtPayload {
   UserInfo?: {
@@ -59,6 +60,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/notifications" element={<Notification />} />
         </Route>
       </Routes>
     </>
