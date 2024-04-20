@@ -1,13 +1,13 @@
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 
-const Home: React.FC = () => {
+const UsedCar: React.FC = () => {
   return (
-    <>
-      <Navbar />
+    <div>
       <Sidebar />
-    </>
+      <Navbar />
+    </div>
   );
 };
 
-export default Home;
+export default UsedCar;

@@ -48,7 +48,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="py-8 md:py-20 md:flex md:flex-col md:items-center w-100%">
+    <div className="py-8 md:py-20 md:flex md:flex-col md:items-center">
       {loading && <Spinner />}
       <div className=" flex gap-8 flex-col justify-center px-8">
         <div>
@@ -68,7 +68,7 @@ const Login: React.FC = () => {
           />
         </div>
 
-        <div className="flex flex-col gap-3  md:w-[150%]">
+        <div className="flex flex-col gap-3 md:w-[150%]">
           <label htmlFor="password">Password:</label>
           <div className="relative">
             <input

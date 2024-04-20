@@ -6,7 +6,16 @@ import RequireAuth from "./components/RequireAuth";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { getUser } from "./redux/slice/getUserSlice";
-import { useAppDispatch } from "./redux/store";
+import { RootState, useAppDispatch } from "./redux/store";
+import NewCar from "./containers/NewCar";
+import SellCarRequest from "./containers/SellCar";
+import UsedCar from "./containers/UsedCar";
+import CarAss from "./containers/CarAss";
+import Order from "./containers/Order";
+import Settings from "./containers/Settings";
+import { useSelector } from "react-redux";
+import Spinner from "./components/Spinner";
+import Users from "./containers/Users";
 
 interface JwtPayload {
   UserInfo?: {
@@ -16,6 +25,7 @@ interface JwtPayload {
 
 function App() {
   const dispatch = useAppDispatch();
+  const loading = useSelector((state: RootState) => state.getUser.loading);
 
   useEffect(() => {
     const accessToken: string | null = localStorage.getItem("accessToken");
@@ -35,13 +45,23 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
+    <>
+      {loading && <Spinner />}
+      <Routes>
+        <Route path="/login" element={<Login />} />
 
-      <Route element={<RequireAuth allowedRoles={[5150]} />}>
-        <Route path="/" element={<Home />} />
-      </Route>
-    </Routes>
+        <Route element={<RequireAuth allowedRoles={[5150]} />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/sell-car" element={<SellCarRequest />} />
+          <Route path="/new-cars" element={<NewCar />} />
+          <Route path="/used-cars" element={<UsedCar />} />
+          <Route path="/car-ass" element={<CarAss />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/orders" element={<Order />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

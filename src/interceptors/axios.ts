@@ -2,9 +2,13 @@ import axios, { AxiosInstance } from "axios";
 
 let accessToken: string | null = null;
 
+//https://one1gbackend.onrender.com/
+
+//http://localhost:5000/
+
 const createAxiosPrivate = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: "http://localhost:5000/",
+    baseURL: "https://one1gbackend.onrender.com/",
     withCredentials: true, // if needed
   });
 
@@ -31,16 +35,21 @@ const createAxiosPrivate = (): AxiosInstance => {
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {
+      console.log(error);
+
       if (error.response && error.response.status === 403) {
-        console.log("okay");
         const response = await instance.get("/refresh");
-        console.log(response);
+        if (response.status === 401) {
+          localStorage.setItem("accessToken", "");
+        }
         if (response.status === 200) {
           accessToken = response.data?.accessToken;
           localStorage.setItem("accessToken", response.data?.accessToken);
           error.config.headers["Authorization"] = `Bearer ${accessToken}`;
           return axios.request(error.config);
         }
+      } else if (error.response && error.response.status === 401) {
+        localStorage.setItem("accessToken", "");
       }
       return Promise.reject(error);
     }

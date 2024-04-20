@@ -30,7 +30,6 @@ export const getUser = createAsyncThunk(
     try {
       dispatch(getUserRequest());
       const { data } = await axiosPrivate.get(`/user/${userId}`);
-
       dispatch(getUserSuccessful(data));
     } catch (error) {
       console.log("Get User Error", error);
