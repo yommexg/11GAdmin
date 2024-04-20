@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
-import { sidebarData } from "../Sidebar/data";
+import { sidebarData } from "./data";
 import Logo from "../../utils/logo";
 
 interface MobileSidebarProps {

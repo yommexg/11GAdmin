@@ -4,10 +4,12 @@ import { useDispatch } from "react-redux";
 
 import loginSlice from "./slice/loginSlice";
 import getUserSlice from "./slice/getUserSlice";
+import logoutSlice from "./slice/logoutSlice";
 
 const rootReducer = combineReducers({
   login: loginSlice.reducer,
   getUser: getUserSlice.reducer,
+  logout: logoutSlice.reducer,
 });
 
 const store = configureStore({

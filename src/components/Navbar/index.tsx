@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { User } from "../../../types";
 
-import MobileSidebar from "./mobileSidebar";
+import MobileSidebar from "../Sidebar/mobileSidebar";
 
 import Logo from "../../utils/logo";
 import { scrollToTop } from "../../utils/scrollToTop";
@@ -39,8 +39,8 @@ const Navbar: React.FC = () => {
   // };
 
   return (
-    <div className="md:ml-[250px] py-5 md:py-8 px-4 bg-white shadow-lg">
-      <div className="flex items-center justify-between md:hidden ">
+    <div className="md:hidden py-5 px-4 bg-white shadow-lg">
+      <div className="flex items-center justify-between">
         <MobileSidebar
           isMenuOpen={isMenuOpen}
           toggleMenu={toggleMenu}
