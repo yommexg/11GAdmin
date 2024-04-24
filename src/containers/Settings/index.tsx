@@ -7,7 +7,7 @@ const Settings: React.FC = () => {
     <div>
       <Sidebar />
       <Navbar />
-      <div className="md:ml-[350px]">
+      <div className="md:ml-[250px]">
         <Logout />
       </div>
     </div>

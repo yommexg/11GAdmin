@@ -31,10 +31,10 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
         {!isMenuOpen && <FaBars size={25} onClick={openMenu} />}
       </div>
       {isMenuOpen && (
-        <div className="z-50 fixed inset-0  bg-gray-300 opacity-90">
-          <div className="block md:hidden top-0 bottom-0 left-0 fixed bg-white shadow-xl w-[250px] py-8 px-5">
+        <div className="z-50 fixed inset-0  bg-white opacity-95">
+          <div className="block md:hidden top-0 bottom-0 left-0 fixed bg-gray-400 shadow-xl w-[250px] py-8 px-5">
             <p
-              className="absolute top-1 px-3 pb-1 right-1 text-2xl bg-slate-400 rounded-full cursor-pointer"
+              className="absolute top-1 px-3 pb-1 right-1 text-2xl bg-white rounded-full cursor-pointer"
               onClick={closeMenu}
             >
               x
@@ -42,25 +42,33 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
             <div>
               <Logo />
             </div>
-            <p className="mt-8 text-sm text-gray-400">Menu</p>
+            <p className="mt-8 text-sm text-gray-900">Menu</p>
             <div className="mt-5">
               {sidebarData.map((item, index) => (
                 <Link
                   to={item.link}
                   key={index}
                   className={`flex items-center px-4 py-3 gap-5 mb-4 hover:opacity-60 ${
-                    location.pathname === item.link ? "bg-gray-500" : ""
+                    (location.pathname === item.link ||
+                      (item.link2 &&
+                        location.pathname.startsWith(
+                          item.link2.slice(0, -2)
+                        ))) &&
+                    "bg-gray-500"
                   }`}
                 >
-                  <img src={item?.imgSrc} alt="" className="h-7 w-7" />
+                  <img src={item.imgSrc} alt="" className="h-7 w-7" />
                   <p
                     className={`${
-                      location.pathname === item.link
-                        ? "text-white"
-                        : "text-black"
+                      (location.pathname === item.link ||
+                        (item.link2 &&
+                          location.pathname.startsWith(
+                            item.link2.slice(0, -2)
+                          ))) &&
+                      "text-white"
                     } font-semibold`}
                   >
-                    {item?.name}
+                    {item.name}
                   </p>
                 </Link>
               ))}

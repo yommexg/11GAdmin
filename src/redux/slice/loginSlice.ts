@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 import { axiosPrivate } from "../../interceptors/axios";
 import { getUser } from "./getUserSlice";
+import { getNewCars } from "./newCarSlice";
 
 interface LoginError {
   message: string;
@@ -59,7 +60,7 @@ export const loginAsync = createAsyncThunk(
       const roles = decodedToken?.UserInfo?.roles;
 
       if (!roles || !roles.includes(5150)) {
-        toast.error("Unauthorized");
+        toast.error("Unauthorized, User is NOT an Admin");
         dispatch(getLoginComplete());
       } else {
         axiosPrivate.defaults.headers.common[
@@ -67,6 +68,8 @@ export const loginAsync = createAsyncThunk(
         ] = `Bearer ${data?.accessToken}`;
 
         await dispatch(getUser({ userId, accessToken: data?.accessToken }));
+
+        await dispatch(getNewCars());
 
         toast.success(data?.message);
         navigate("/");

@@ -5,11 +5,13 @@ import { useDispatch } from "react-redux";
 import loginSlice from "./slice/loginSlice";
 import getUserSlice from "./slice/getUserSlice";
 import logoutSlice from "./slice/logoutSlice";
+import newCarSlice from "./slice/newCarSlice";
 
 const rootReducer = combineReducers({
   login: loginSlice.reducer,
   getUser: getUserSlice.reducer,
   logout: logoutSlice.reducer,
+  newCar: newCarSlice.reducer,
 });
 
 const store = configureStore({

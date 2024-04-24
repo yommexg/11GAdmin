@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
     (state: RootState) => state.getUser.userData as User
   );
   return (
-    <div className="hidden md:block top-0 bottom-0 fixed bg-white shadow-xl w-[350px] py-8 px-5">
+    <div className="hidden md:block top-0 bottom-0 w-[250px] fixed bg-white shadow-xl py-8 px-5">
       <div className="flex justify-between">
         <Logo />
         <div className="flex items-center gap-8">
@@ -39,16 +39,22 @@ const Sidebar: React.FC = () => {
             to={item.link}
             key={index}
             className={`flex items-center px-4 py-3 gap-5 mb-4 hover:opacity-60 ${
-              location.pathname === item.link ? "bg-gray-500" : ""
+              (location.pathname === item.link ||
+                (item.link2 &&
+                  location.pathname.startsWith(item.link2.slice(0, -2)))) &&
+              "bg-gray-500"
             }`}
           >
-            <img src={item?.imgSrc} alt="" className="h-7 w-7" />
+            <img src={item.imgSrc} alt="" className="h-7 w-7" />
             <p
               className={`${
-                location.pathname === item.link ? "text-white" : "text-black"
+                (location.pathname === item.link ||
+                  (item.link2 &&
+                    location.pathname.startsWith(item.link2.slice(0, -2)))) &&
+                "text-white"
               } font-semibold`}
             >
-              {item?.name}
+              {item.name}
             </p>
           </Link>
         ))}

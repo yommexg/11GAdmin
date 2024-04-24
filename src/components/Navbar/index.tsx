@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
   // };
 
   return (
-    <div className="md:hidden py-5 px-4 bg-white shadow-lg">
+    <div className="md:hidden py-5 px-4 bg-white border-b-2">
       <div className="flex items-center justify-between">
         <MobileSidebar
           isMenuOpen={isMenuOpen}

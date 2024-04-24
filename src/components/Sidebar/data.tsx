@@ -54,6 +54,7 @@ export const sidebarData = [
   {
     name: "New Cars",
     link: "/new-cars",
+    link2: "/new-cars/*",
     imgSrc: newCarImg,
   },
 
