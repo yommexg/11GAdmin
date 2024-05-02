@@ -21,6 +21,8 @@ import NewCars from "./containers/NewCar";
 import RequireAuth from "./components/RequireAuth";
 import Spinner from "./components/Spinner";
 import NewCarDetails from "./containers/NewCar/newCarDetails";
+import { getUsedCars } from "./redux/slice/usedCarSlice";
+import UsedCarDetails from "./containers/UsedCar/usedCarDetails";
 
 interface JwtPayload {
   UserInfo?: {
@@ -49,12 +51,13 @@ function App() {
           userId,
         })
       );
+      dispatch(getNewCars({ userId }));
+      dispatch(getUsedCars({ userId }));
     }
-    dispatch(getNewCars());
   }, [dispatch]);
 
   return (
-    <>
+    <div className="mt-[84px] md:mt-0">
       {loadingUser || (loadingNewCars && <Spinner />)}
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -70,9 +73,10 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/notifications" element={<Notification />} />
           <Route path="/new-cars/:newCarId" element={<NewCarDetails />} />
+          <Route path="/used-cars/:usedCarId" element={<UsedCarDetails />} />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

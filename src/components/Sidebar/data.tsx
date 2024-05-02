@@ -3,10 +3,10 @@ const dashoardImg = new URL(
   import.meta.url
 ).href;
 
-const sellImg = new URL(
-  "../../assets/sidebarImages/sell-car.png",
-  import.meta.url
-).href;
+// const sellImg = new URL(
+//   "../../assets/sidebarImages/sell-car.png",
+//   import.meta.url
+// ).href;
 
 const newCarImg = new URL(
   "../../assets/sidebarImages/new-car.png",
@@ -45,11 +45,11 @@ export const sidebarData = [
     imgSrc: dashoardImg,
   },
 
-  {
-    name: "Sell Car Request",
-    link: "/sell-car",
-    imgSrc: sellImg,
-  },
+  // {
+  //   name: "Sell Car Request",
+  //   link: "/sell-car",
+  //   imgSrc: sellImg,
+  // },
 
   {
     name: "New Cars",
@@ -61,12 +61,14 @@ export const sidebarData = [
   {
     name: "Used Cars",
     link: "/used-cars",
+    link2: "/used-cars/*",
     imgSrc: usedCarImg,
   },
 
   {
     name: "Car Assesories",
     link: "/car-ass",
+    link2: "/car-ass/*",
     imgSrc: carAssImg,
   },
 

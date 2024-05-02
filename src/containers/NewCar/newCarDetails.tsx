@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import { useSelector } from "react-redux";
 import { FaArrowCircleLeft } from "react-icons/fa";
 
@@ -16,10 +17,22 @@ import NewCarDetailsImages from "./newCarDetailsImages";
 import OtherNewCarDetails from "./otherNewCarDetails";
 import NewCarButtons from "./newCarButtons";
 
+interface JwtPayload {
+  UserInfo?: {
+    _id: string;
+  };
+}
+
 const NewCarDetails: React.FC = () => {
   const { newCarId } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const accessToken: string | null = localStorage.getItem("accessToken");
+  const decodedToken: JwtPayload | null = accessToken
+    ? jwtDecode<JwtPayload>(accessToken)
+    : null;
+  const userId: string | undefined = decodedToken?.UserInfo?._id;
 
   const newCar = useSelector(
     (state: RootState) => state.newCar.oneNewCarData as NewCar
@@ -30,9 +43,10 @@ const NewCarDetails: React.FC = () => {
   );
 
   useEffect(() => {
-    if (newCarId) {
+    if (newCarId && userId) {
       dispatch(
         getOneNewCar({
+          userId,
           newCarId,
           extra: {
             navigate,
@@ -40,10 +54,10 @@ const NewCarDetails: React.FC = () => {
         })
       );
     }
-  }, [newCarId, dispatch, navigate]);
+  }, [newCarId, dispatch, navigate, userId]);
 
   return (
-    <div>
+    <div className="mb-3">
       {loadingNewCars && <Spinner />}
       <Sidebar />
       <Navbar />
@@ -58,7 +72,8 @@ const NewCarDetails: React.FC = () => {
             <h2
               className="font-bold text-sm sm:text-base uppercase md:text-lg text-center"
               style={{
-                color: newCar?.carColor,
+                color:
+                  newCar?.carColor === "white" ? "black" : newCar?.carColor,
               }}
             >
               {newCar?.carColor} {""} {newCar.carName}
@@ -92,5 +107,3 @@ const NewCarDetails: React.FC = () => {
 };
 
 export default NewCarDetails;
-
-//Desc and created time  and delete button

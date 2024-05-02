@@ -8,12 +8,17 @@ const OtherNewCarDetails = () => {
     (state: RootState) => state.newCar.oneNewCarData as NewCar
   );
 
+  const formattedPrice = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(newCar?.price);
+
   return (
-    <div className="mx-2 flex flex-col gap-5 md:flex-wrap text-sm md:text-[20px] md:flex-row bg-gray-200 px-2 py-6">
+    <div className="mx-2 flex md:flex-wrap flex-col gap-5 text-xs md:text-base md:flex-row bg-gray-200 px-2 py-6">
       <p className="text-blue-700">
         Price:{" "}
         <span className="italic text-black ml-1 font-semibold">
-          &#8358;{newCar?.price}
+          {formattedPrice}
         </span>
       </p>
       <p className="text-[#800080]">
@@ -32,6 +37,12 @@ const OtherNewCarDetails = () => {
         Brand:{" "}
         <span className="italic text-black ml-1 font-semibold">
           {newCar?.carBrand}
+        </span>
+      </p>
+      <p className="text-[#02063b]">
+        Color:{" "}
+        <span className="italic text-black ml-1 font-semibold">
+          {newCar?.carColor}
         </span>
       </p>
       <p className="text-[#FF00FF]">

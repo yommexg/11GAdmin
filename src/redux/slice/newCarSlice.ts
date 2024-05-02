@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { axiosPrivate } from "../../interceptors/axios";
+import { NewCar } from "../../../types";
+
+interface FileWithPreview extends File {
+  previewUrl?: string;
+}
 
 interface GetNewCarsError {
   message: string;
@@ -21,14 +26,14 @@ interface ExtraArgs {
 
 export const getNewCars = createAsyncThunk(
   "car/getNewCars",
-  async (_crendentials, { dispatch, rejectWithValue }) => {
+  async ({ userId }: { userId: string }, { dispatch, rejectWithValue }) => {
     try {
       dispatch(getNewCarsRequest());
-      const { data } = await axiosPrivate.get("/new-cars");
+      const { data } = await axiosPrivate.get(`new-cars/${userId}`);
       // console.log(data);
       dispatch(getNewCarsSuccessful(data));
     } catch (error) {
-      console.log("Get New Cars Error", error);
+      console.log("Get Used Cars Error", error);
       let errorMessage = "An error occurred";
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<GetNewCarsError>;
@@ -36,7 +41,7 @@ export const getNewCars = createAsyncThunk(
           errorMessage = axiosError.response.data.message;
         }
       }
-      dispatch(getNewCarsFail());
+      dispatch(getNewCarsComplete());
       return rejectWithValue({ message: errorMessage });
     }
   }
@@ -45,14 +50,20 @@ export const getNewCars = createAsyncThunk(
 export const getOneNewCar = createAsyncThunk(
   "car/getOneNewCar",
   async (
-    { newCarId, extra }: { newCarId: string; extra: ExtraArgs },
+    {
+      newCarId,
+      userId,
+      extra,
+    }: { newCarId: string; userId: string; extra: ExtraArgs },
     { dispatch, rejectWithValue }
   ) => {
     const { navigate } = extra;
 
     try {
       dispatch(getNewCarsRequest());
-      const { data } = await axiosPrivate.get(`/new-cars/${newCarId}`);
+      const { data } = await axiosPrivate.get(
+        `/new-cars/${userId}/${newCarId}`
+      );
       dispatch(getOneNewCarSucessful(data));
 
       navigate(`/new-cars/${newCarId}`);
@@ -65,7 +76,93 @@ export const getOneNewCar = createAsyncThunk(
           errorMessage = axiosError.response.data.message;
         }
       }
-      dispatch(getNewCarsFail());
+      dispatch(getNewCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
+export const addNewCar = createAsyncThunk(
+  "car/addNewCar",
+  async (
+    {
+      car: {
+        carName,
+        carColor,
+        carBrand,
+        price,
+        quantity,
+        year,
+        discount,
+        gearType,
+        energyType,
+        engineNumber,
+        engineType,
+        description,
+      },
+      selectedFiles,
+      userId,
+      extra,
+    }: {
+      car: NewCar;
+      selectedFiles: FileWithPreview[];
+      userId: string;
+      extra: ExtraArgs;
+    },
+    { dispatch, rejectWithValue }
+  ) => {
+    const { navigate } = extra;
+
+    try {
+      dispatch(getNewCarsRequest());
+
+      const formData = new FormData();
+
+      formData.append("carName", carName);
+      formData.append("carBrand", carBrand);
+      formData.append("color", carColor);
+      formData.append("gearType", gearType);
+      formData.append("year", year.toString());
+      formData.append("price", price.toString());
+      formData.append("discount", discount.toString());
+      formData.append("quantity", quantity.toString());
+      formData.append("description", description);
+      formData.append("engineType", engineType);
+      formData.append("engineNumber", engineNumber);
+      formData.append("carColor", carColor);
+      formData.append("energyType", energyType);
+
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("New-Car", selectedFiles[i]);
+      }
+
+      const { data } = await axiosPrivate.post(
+        `/new-cars/${userId}/create/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success(data.success);
+
+      await dispatch(getNewCars({ userId }));
+
+      dispatch(getNewCarsComplete());
+
+      navigate("/new-cars");
+    } catch (error) {
+      console.log("Add New Car Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetNewCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getNewCarsComplete());
       return rejectWithValue({ message: errorMessage });
     }
   }
@@ -91,7 +188,7 @@ export const updateNewCarStatus = createAsyncThunk(
     try {
       dispatch(getNewCarsRequest());
       const { data } = await axiosPrivate.patch(
-        `/new-car/${userId}/change-status/${newCarId}`,
+        `/new-cars/${userId}/change-status/${newCarId}`,
         {
           carStatus,
         }
@@ -100,15 +197,14 @@ export const updateNewCarStatus = createAsyncThunk(
       toast.success(data.success);
       await dispatch(
         getOneNewCar({
+          userId,
           newCarId,
           extra: {
             navigate,
           },
         })
       );
-      dispatch(getNewCarsFail());
-
-      // dispatch(getOneNewCarSucessful(data));
+      dispatch(getNewCarsComplete());
     } catch (error) {
       console.log("Change New Car Status Error", error);
       let errorMessage = "An error occurred";
@@ -118,7 +214,49 @@ export const updateNewCarStatus = createAsyncThunk(
           errorMessage = axiosError.response.data.message;
         }
       }
-      dispatch(getNewCarsFail());
+      dispatch(getNewCarsComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
+export const deleteNewCar = createAsyncThunk(
+  "car/deleteNewCar",
+  async (
+    {
+      newCarId,
+      userId,
+      extra,
+    }: {
+      newCarId: string;
+      userId: string;
+      extra: ExtraArgs;
+    },
+    { dispatch, rejectWithValue }
+  ) => {
+    const { navigate } = extra;
+    try {
+      dispatch(getNewCarsRequest());
+      const { data } = await axiosPrivate.delete(
+        `/new-cars/${userId}/delete/${newCarId}`
+      );
+
+      toast.success(data.success);
+      await dispatch(getNewCars({ userId }));
+
+      dispatch(getNewCarsComplete());
+
+      navigate("/new-cars");
+    } catch (error) {
+      console.log("Change New Car Status Error", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetNewCarsError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getNewCarsComplete());
       return rejectWithValue({ message: errorMessage });
     }
   }
@@ -131,7 +269,7 @@ const initialState: getNewCarsState = {
 };
 
 const newCarSlice = createSlice({
-  name: "login",
+  name: "newCar",
   initialState,
   reducers: {
     getNewCarsRequest: (state) => {
@@ -145,7 +283,7 @@ const newCarSlice = createSlice({
       state.oneNewCarData = action.payload;
       state.loading = false;
     },
-    getNewCarsFail: (state) => {
+    getNewCarsComplete: (state) => {
       state.loading = false;
     },
   },
@@ -153,7 +291,7 @@ const newCarSlice = createSlice({
 
 export const {
   getNewCarsSuccessful,
-  getNewCarsFail,
+  getNewCarsComplete,
   getNewCarsRequest,
   getOneNewCarSucessful,
 } = newCarSlice.actions;

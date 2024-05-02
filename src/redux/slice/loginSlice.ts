@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { axiosPrivate } from "../../interceptors/axios";
 import { getUser } from "./getUserSlice";
 import { getNewCars } from "./newCarSlice";
+import { getUsedCars } from "./usedCarSlice";
 
 interface LoginError {
   message: string;
@@ -69,7 +70,9 @@ export const loginAsync = createAsyncThunk(
 
         await dispatch(getUser({ userId, accessToken: data?.accessToken }));
 
-        await dispatch(getNewCars());
+        await dispatch(getNewCars({ userId }));
+
+        await dispatch(getUsedCars({ userId }));
 
         toast.success(data?.message);
         navigate("/");

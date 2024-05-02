@@ -1,17 +1,31 @@
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 import { NewCar as NewCarType } from "../../../types";
 import { useAppDispatch } from "../../redux/store";
 import { getOneNewCar } from "../../redux/slice/newCarSlice";
 
+interface JwtPayload {
+  UserInfo?: {
+    _id: string;
+  };
+}
+
 const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const accessToken: string | null = localStorage.getItem("accessToken");
+  const decodedToken: JwtPayload | null = accessToken
+    ? jwtDecode<JwtPayload>(accessToken)
+    : null;
+  const userId: string | undefined = decodedToken?.UserInfo?._id;
+
   const handleOneCarDetails = async () => {
-    if (item._id) {
+    if (item._id && userId) {
       await dispatch(
         getOneNewCar({
+          userId,
           newCarId: item?._id,
           extra: {
             navigate,
@@ -20,6 +34,11 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
       );
     }
   };
+
+  const formattedPrice = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+  }).format(item?.price);
 
   return (
     <div className="bg-gray-100 p-4">
@@ -34,13 +53,13 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
         <h2
           className="font-bold uppercase"
           style={{
-            color: item?.carColor,
+            color: item?.carColor === "white" ? "black" : item?.carColor,
           }}
         >
           {item?.carColor} {""} {item.carName}
         </h2>
         <p className="text-blue-700 italic text-lg font-semibold">
-          &#8358;{item?.price}
+          {formattedPrice}{" "}
         </p>
       </div>
 

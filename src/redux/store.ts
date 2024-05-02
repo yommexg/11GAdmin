@@ -6,12 +6,14 @@ import loginSlice from "./slice/loginSlice";
 import getUserSlice from "./slice/getUserSlice";
 import logoutSlice from "./slice/logoutSlice";
 import newCarSlice from "./slice/newCarSlice";
+import usedCarSlice from "./slice/usedCarSlice";
 
 const rootReducer = combineReducers({
   login: loginSlice.reducer,
   getUser: getUserSlice.reducer,
   logout: logoutSlice.reducer,
   newCar: newCarSlice.reducer,
+  usedCar: usedCarSlice.reducer,
 });
 
 const store = configureStore({
