@@ -39,6 +39,8 @@ function App() {
   const loadingUsedCars = useSelector(
     (state: RootState) => state.usedCar.loading
   );
+  const loadingLogin = useSelector((state: RootState) => state.login.loading);
+  const loadingLogout = useSelector((state: RootState) => state.login.loading);
 
   useEffect(() => {
     const accessToken: string | null = localStorage.getItem("accessToken");
@@ -61,7 +63,11 @@ function App() {
 
   return (
     <div className="mt-[84px] md:mt-0">
-      {(loadingUser || loadingNewCars || loadingUsedCars) && <Spinner />}
+      {(loadingUser ||
+        loadingNewCars ||
+        loadingUsedCars ||
+        loadingLogout ||
+        loadingLogin) && <Spinner />}
       <Routes>
         <Route path="/login" element={<Login />} />
 
