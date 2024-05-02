@@ -21,10 +21,12 @@ const NewCars: React.FC = () => {
         <div className=" mb-2 px-4 py-3 md:py-6 md:px-8 flex items-center justify-between bg-white shadow-2xl ">
           <h2 className="font-bold text-2xl">New Cars</h2>
           <AddNewCar />
-        </div>
-        <div className="flex flex-wrap justify-center gap-8 px-2 py-4">
-          {newCarData.length > 0 &&
-            newCarData?.map((item) => <NewCar key={item._id} item={item} />)}
+        </div>{" "}
+        <div className="overflow-y-auto h-[80vh]">
+          <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-y-auto">
+            {newCarData.length > 0 &&
+              newCarData?.map((item) => <NewCar key={item._id} item={item} />)}
+          </div>
         </div>
       </div>
     </div>

@@ -175,7 +175,7 @@ const AddUsedCar: React.FC = () => {
       {isPopUpOpen && (
         <div className="fixed top-0 left-0 w-full h-full   bg-gray-700 bg-opacity-95 z-50 flex justify-center items-center">
           <p
-            className="absolute top-2 right-1 text-3xl bg-black rounded-full px-4 pb-2 cursor-pointer text-white"
+            className="absolute top-0 right-0 text-xl bg-black rounded-full px-3 pb-1 cursor-pointer text-white"
             onClick={handleClosePopUp}
           >
             x
