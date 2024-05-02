@@ -22,7 +22,7 @@ const UsedCars: React.FC = () => {
           <h2 className="font-bold text-2xl">Used Cars</h2>
           <AddUsedCar />
         </div>
-        <div className="flex flex-wrap justify-center gap-8 px-2 py-4">
+        <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-auto h-full">
           {usedCarData.length > 0 &&
             usedCarData?.map((item) => <UsedCar key={item._id} item={item} />)}
         </div>
