@@ -1,12 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 import Logo from "../../utils/logo";
-import { RootState, useAppDispatch } from "../../redux/store";
+import { useAppDispatch } from "../../redux/store";
 import { loginAsync } from "../../redux/slice/loginSlice";
-import Spinner from "../../components/Spinner";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -15,8 +13,6 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const loading = useSelector((state: RootState) => state.login.loading);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -49,7 +45,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="py-8 md:py-20 md:flex md:flex-col md:items-center">
-      {loading && <Spinner />}
       <div className=" flex gap-8 flex-col justify-center px-8">
         <div>
           <Logo />

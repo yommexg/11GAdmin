@@ -5,7 +5,6 @@ import Sidebar from "../../components/Sidebar";
 
 import { RootState } from "../../redux/store";
 import { UsedCar as UsedCarType } from "../../../types";
-import Spinner from "../../components/Spinner";
 import UsedCar from "./usedCar";
 import AddUsedCar from "./addUsedCar";
 
@@ -14,13 +13,8 @@ const UsedCars: React.FC = () => {
     (state: RootState) => state.usedCar.usedCarsData as UsedCarType[]
   );
 
-  const loadingUsedCars = useSelector(
-    (state: RootState) => state.usedCar.loading
-  );
-
   return (
     <div>
-      {loadingUsedCars && <Spinner />}
       <Sidebar />
       <Navbar />
       <div className="md:ml-[250px] bg-white">

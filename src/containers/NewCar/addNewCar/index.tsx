@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,10 +12,9 @@ import SelectColor from "./selectCarColor";
 import CarImages from "./carImages";
 
 import { carBrands } from "../../../utils/carBrands";
-import { RootState, useAppDispatch } from "../../../redux/store";
+import { useAppDispatch } from "../../../redux/store";
 import { addNewCar } from "../../../redux/slice/newCarSlice";
 import { jwtDecode } from "jwt-decode";
-import Spinner from "../../../components/Spinner";
 
 interface FileWithPreview extends File {
   previewUrl?: string;
@@ -31,10 +29,6 @@ interface JwtPayload {
 const AddNewCar: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const loadingNewCars = useSelector(
-    (state: RootState) => state.newCar.loading
-  );
 
   const accessToken: string | null = localStorage.getItem("accessToken");
 
@@ -163,7 +157,6 @@ const AddNewCar: React.FC = () => {
             x
           </p>
           <div className="flex flex-col overflow-auto h-[90vh] gap-5 bg-slate-600 py-5 px-5 md:px-20">
-            {loadingNewCars && <Spinner />}
             <div className="flex items-center gap-2">
               <label className="font-bold text-sm">
                 Name: <span className="text-red-500">*</span>

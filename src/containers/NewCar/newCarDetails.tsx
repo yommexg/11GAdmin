@@ -8,7 +8,6 @@ import { RootState, useAppDispatch } from "../../redux/store";
 import { NewCar } from "../../../types";
 import { getOneNewCar } from "../../redux/slice/newCarSlice";
 
-import Spinner from "../../components/Spinner";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 
@@ -38,10 +37,6 @@ const NewCarDetails: React.FC = () => {
     (state: RootState) => state.newCar.oneNewCarData as NewCar
   );
 
-  const loadingNewCars = useSelector(
-    (state: RootState) => state.newCar.loading
-  );
-
   useEffect(() => {
     if (newCarId && userId) {
       dispatch(
@@ -58,7 +53,6 @@ const NewCarDetails: React.FC = () => {
 
   return (
     <div className="mb-3">
-      {loadingNewCars && <Spinner />}
       <Sidebar />
       <Navbar />
       {newCar && (

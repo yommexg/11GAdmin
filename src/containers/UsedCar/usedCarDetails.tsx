@@ -8,7 +8,6 @@ import { RootState, useAppDispatch } from "../../redux/store";
 import { UsedCar } from "../../../types";
 import { getOneUsedCar } from "../../redux/slice/usedCarSlice";
 
-import Spinner from "../../components/Spinner";
 import Navbar from "../../components/Navbar";
 import Sidebar from "../../components/Sidebar";
 
@@ -39,10 +38,6 @@ const UsedCarDetails: React.FC = () => {
     (state: RootState) => state.usedCar.oneUsedCarData as UsedCar
   );
 
-  const loadingUsedCars = useSelector(
-    (state: RootState) => state.usedCar.loading
-  );
-
   useEffect(() => {
     if (usedCarId && userId) {
       dispatch(
@@ -59,7 +54,6 @@ const UsedCarDetails: React.FC = () => {
 
   return (
     <div className="mb-3">
-      {loadingUsedCars && <Spinner />}
       <Sidebar />
       <Navbar />
       {usedCar && (

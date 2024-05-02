@@ -6,7 +6,6 @@ import Sidebar from "../../components/Sidebar";
 import { RootState } from "../../redux/store";
 import { NewCar as NewCarType } from "../../../types";
 import NewCar from "./newCar";
-import Spinner from "../../components/Spinner";
 import AddNewCar from "./addNewCar";
 
 const NewCars: React.FC = () => {
@@ -14,13 +13,8 @@ const NewCars: React.FC = () => {
     (state: RootState) => state.newCar.newCarsData as NewCarType[]
   );
 
-  const loadingNewCars = useSelector(
-    (state: RootState) => state.newCar.loading
-  );
-
   return (
     <div>
-      {loadingNewCars && <Spinner />}
       <Sidebar />
       <Navbar />
       <div className="md:ml-[250px] bg-white">

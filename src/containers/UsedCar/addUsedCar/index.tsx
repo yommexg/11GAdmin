@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
@@ -15,8 +14,7 @@ import CarImages from "./carImages";
 import CarAddress from "./carAddress";
 
 import { carBrands } from "../../../utils/carBrands";
-import { RootState, useAppDispatch } from "../../../redux/store";
-import Spinner from "../../../components/Spinner";
+import { useAppDispatch } from "../../../redux/store";
 import { addUsedCar } from "../../../redux/slice/usedCarSlice";
 
 interface FileWithPreview extends File {
@@ -32,10 +30,6 @@ interface JwtPayload {
 const AddUsedCar: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const loadingNewCars = useSelector(
-    (state: RootState) => state.newCar.loading
-  );
 
   const accessToken: string | null = localStorage.getItem("accessToken");
 
@@ -187,7 +181,6 @@ const AddUsedCar: React.FC = () => {
             x
           </p>
           <div className="flex flex-col overflow-auto h-[90vh] gap-5 bg-slate-600 py-5 px-5 md:px-20">
-            {loadingNewCars && <Spinner />}
             <div className="flex items-center gap-2">
               <label className="font-bold text-sm">
                 Name: <span className="text-red-500">*</span>
