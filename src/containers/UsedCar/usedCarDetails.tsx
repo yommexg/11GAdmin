@@ -58,7 +58,7 @@ const UsedCarDetails: React.FC = () => {
       <Navbar />
       {usedCar && (
         <div className="md:ml-[250px]">
-          <div className="overflow-y-auto h-[80vh]">
+          <div className="overflow-y-auto h-screen">
             <div className=" mb-2 px-4 py-3 md:py-6 md:px-8 flex lg:px-15 items-center justify-between gap-2 bg-white shadow-2xl">
               <FaArrowCircleLeft
                 size={24}
