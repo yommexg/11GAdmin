@@ -57,45 +57,43 @@ const NewCarDetails: React.FC = () => {
       <Navbar />
       {newCar && (
         <div className="md:ml-[250px]">
-          <div className="overflow-y-auto h-[80vh]">
-            <div className=" mb-2 px-4 py-3 md:py-6 md:px-8 flex lg:px-15 items-center justify-between gap-2 bg-white shadow-2xl">
-              <FaArrowCircleLeft
-                size={24}
-                onClick={() => navigate("/new-cars")}
-                className="cursor-pointer"
+          <div className=" mb-2 px-4 py-3 md:py-6 md:px-8 flex lg:px-15 items-center justify-between gap-2 bg-white shadow-2xl">
+            <FaArrowCircleLeft
+              size={24}
+              onClick={() => navigate("/new-cars")}
+              className="cursor-pointer"
+            />
+            <h2
+              className="font-bold text-sm sm:text-base uppercase md:text-lg text-center"
+              style={{
+                color:
+                  newCar?.carColor === "white" ? "black" : newCar?.carColor,
+              }}
+            >
+              {newCar?.carColor} {""} {newCar.carName}
+            </h2>
+            <div className="flex items-center gap-1">
+              <img
+                src={statusImage[newCar.status as number]}
+                alt=""
+                className="md:w-6 md:h-6 w-4 h-4"
               />
-              <h2
-                className="font-bold text-sm sm:text-base uppercase md:text-lg text-center"
-                style={{
-                  color:
-                    newCar?.carColor === "white" ? "black" : newCar?.carColor,
-                }}
+              <p
+                className="font-semibold text-sm sm:text-base"
+                style={{ color: statusColor[newCar.status as number] }}
               >
-                {newCar?.carColor} {""} {newCar.carName}
-              </h2>
-              <div className="flex items-center gap-1">
-                <img
-                  src={statusImage[newCar.status as number]}
-                  alt=""
-                  className="md:w-6 md:h-6 w-4 h-4"
-                />
-                <p
-                  className="font-semibold text-sm sm:text-base"
-                  style={{ color: statusColor[newCar.status as number] }}
-                >
-                  {statusName[newCar.status as number]}
-                </p>
-              </div>
+                {statusName[newCar.status as number]}
+              </p>
             </div>
-            <OtherNewCarDetails />
-            <NewCarDetailsImages />
-            <div className="mx-2 bg-gray-200 px-2 py-6">
-              <h3 className="text-center font-bold text-lg">Car Description</h3>
-              <p className="text-center">{newCar?.description}</p>
-            </div>
-
-            <NewCarButtons />
           </div>
+          <OtherNewCarDetails />
+          <NewCarDetailsImages />
+          <div className="mx-2 bg-gray-200 px-2 py-6">
+            <h3 className="text-center font-bold text-lg">Car Description</h3>
+            <p className="text-center">{newCar?.description}</p>
+          </div>
+
+          <NewCarButtons />
         </div>
       )}
     </div>

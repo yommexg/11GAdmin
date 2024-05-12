@@ -22,14 +22,14 @@ const NewCarDetailsImages = () => {
           <h2 className="font-bold text-lg">Images of {newCar.carName}</h2>
           <h5 className="text-sm italic">Click Image to preview</h5>
         </div>
-        <div className="flex flex-wrap gap-7 justify-center">
+        <div className="flex flex-wrap gap-5 justify-center">
           {newCar?.carImage &&
             newCar?.carImage.map((img, index) => (
               <img
                 src={img}
                 alt={img}
                 key={index + img}
-                className="w-[200px] h-[200px] rounded-lg cursor-pointer hover:opacity-70"
+                className="w-[150px]  md:w-[300px] rounded-lg cursor-pointer bg-[#333333] p-1 hover:opacity-70"
                 onClick={() => handleImageClick(img)}
               />
             ))}
@@ -37,7 +37,7 @@ const NewCarDetailsImages = () => {
       </div>
 
       {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-95 flex justify-center items-center z-50 p-4">
           <img
             src={selectedImage}
             alt="Selected Car Image"

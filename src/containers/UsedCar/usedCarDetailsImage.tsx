@@ -29,7 +29,7 @@ const UsedCarDetailsImages = () => {
                 src={img}
                 alt={img}
                 key={index + img}
-                className="w-[200px] h-[200px] rounded-lg cursor-pointer hover:opacity-70"
+                className="w-[150px] md:w-[300px] rounded-lg cursor-pointer bg-[#333333] p-1 hover:opacity-70"
                 onClick={() => handleImageClick(img)}
               />
             ))}
@@ -37,7 +37,7 @@ const UsedCarDetailsImages = () => {
       </div>
 
       {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-95 flex justify-center items-center z-50 p-4">
           <img
             src={selectedImage}
             alt="Selected Car Image"

@@ -4,11 +4,11 @@ let accessToken: string | null = null;
 
 //https://one1gbackend.onrender.com/
 
-//
+// http://localhost:5000/
 
 const createAxiosPrivate = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: "https://one1gbackend.onrender.com",
+    baseURL: "https://one1gbackend.onrender.com/",
     withCredentials: true, // if needed
   });
 

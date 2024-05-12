@@ -3,7 +3,7 @@ interface SelectEngineProps {
   setSelectedEngine: React.Dispatch<string>;
 }
 
-const engineInfo = ["V2", "V4", "V6", "V8"];
+const engineInfo = ["V3", "V4", "v5", "V6", "V8", "V10", "V12"];
 
 const SelectEngine: React.FC<SelectEngineProps> = ({
   selectedEngine,
