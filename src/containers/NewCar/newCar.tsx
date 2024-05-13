@@ -41,7 +41,7 @@ const NewCar: React.FC<{ item: NewCarType }> = ({ item }) => {
   }).format(item?.price);
 
   return (
-    <div className="bg-gray-100 p-4 w-[150px] md:w-[300px] md:max-h-[400px] md:p-8">
+    <div className="bg-gray-100 p-4 w-[150px] md:w-[300px] md:max-h-[400px] md:p-8 rounded-md">
       <div className="mb-4">
         <img
           src={item?.carImage && item?.carImage[0]}

@@ -15,63 +15,63 @@ const OtherUsedCarDetails = () => {
 
   return (
     <div className="flex flex-col gap-5 text-xs md:text-base">
-      <p className="text-blue-700">
+      <p>
         Price:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {formattedPrice}
         </span>
       </p>
-      <p className="text-[#800080]">
+      <p>
         Discount:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.discount}&#37;
         </span>
       </p>
-      <p className="text-[#FFA500]">
+      <p>
         Quantity:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.quantity}
         </span>
       </p>
-      <p className="text-[#00FF00]">
+      <p>
         Brand:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.carBrand}
         </span>
       </p>
-      <p className="text-[#02063b]">
+      <p>
         Color:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.carColor}
         </span>
       </p>
-      <p className="text-[#FF00FF]">
+      <p>
         Year:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.year}
         </span>
       </p>
-      <p className="text-[#A52A2A]">
+      <p>
         Gear Type:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.gearType}
         </span>
       </p>
-      <p className="text-[#808080]">
+      <p>
         Fuel Type:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.energyType}
         </span>
       </p>
-      <p className="text-[#079b9b]">
+      <p>
         Engine Number:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.engineNumber}
         </span>
       </p>
-      <p className="text-[#e24d4d]">
+      <p>
         Engine Type:{" "}
-        <span className="italic text-black ml-1 font-semibold">
+        <span className="italic text-blue-500 ml-1 font-bold">
           {usedCar?.engineType}
         </span>
       </p>

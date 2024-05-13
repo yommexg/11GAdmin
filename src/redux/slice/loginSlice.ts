@@ -8,6 +8,7 @@ import { axiosPrivate } from "../../interceptors/axios";
 import { getUser } from "./getUserSlice";
 import { getNewCars } from "./newCarSlice";
 import { getUsedCars } from "./usedCarSlice";
+import { getCarAss } from "./carAssSlice";
 
 interface LoginError {
   message: string;
@@ -73,6 +74,8 @@ export const loginAsync = createAsyncThunk(
         await dispatch(getNewCars({ userId }));
 
         await dispatch(getUsedCars({ userId }));
+
+        await dispatch(getCarAss({ userId }));
 
         toast.success(data?.message);
         navigate("/");

@@ -58,3 +58,15 @@ export interface UsedCar {
   carImage: [string];
   createdAt: string;
 }
+
+export interface CarAss {
+  _id: string;
+  itemName: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  description: string;
+  status: number;
+  itemImage: [string];
+  createdAt: string;
+}

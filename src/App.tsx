@@ -23,6 +23,8 @@ import Spinner from "./components/Spinner";
 import NewCarDetails from "./containers/NewCar/newCarDetails";
 import { getUsedCars } from "./redux/slice/usedCarSlice";
 import UsedCarDetails from "./containers/UsedCar/usedCarDetails";
+import { getCarAss } from "./redux/slice/carAssSlice";
+import CarAssDetails from "./containers/CarAss/carAssDetails";
 
 interface JwtPayload {
   UserInfo?: {
@@ -40,7 +42,8 @@ function App() {
     (state: RootState) => state.usedCar.loading
   );
   const loadingLogin = useSelector((state: RootState) => state.login.loading);
-  const loadingLogout = useSelector((state: RootState) => state.login.loading);
+  const loadingLogout = useSelector((state: RootState) => state.logout.loading);
+  const loadingCarAss = useSelector((state: RootState) => state.carAss.loading);
 
   useEffect(() => {
     const accessToken: string | null = localStorage.getItem("accessToken");
@@ -58,6 +61,7 @@ function App() {
       );
       dispatch(getNewCars({ userId }));
       dispatch(getUsedCars({ userId }));
+      dispatch(getCarAss({ userId }));
     }
   }, [dispatch]);
 
@@ -66,6 +70,7 @@ function App() {
       {(loadingUser ||
         loadingNewCars ||
         loadingUsedCars ||
+        loadingCarAss ||
         loadingLogout ||
         loadingLogin) && <Spinner />}
       <Routes>
@@ -83,6 +88,7 @@ function App() {
           <Route path="/notifications" element={<Notification />} />
           <Route path="/new-cars/:newCarId" element={<NewCarDetails />} />
           <Route path="/used-cars/:usedCarId" element={<UsedCarDetails />} />
+          <Route path="/car-ass/:carAssId" element={<CarAssDetails />} />
         </Route>
       </Routes>
     </div>
