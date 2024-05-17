@@ -23,7 +23,7 @@ const NewCars: React.FC = () => {
           <AddNewCar />
         </div>{" "}
         <div className="overflow-y-auto h-[80vh]">
-          <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-y-auto">
+          <div className="flex w-[100%] flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
             {newCarData.length > 0 &&
               newCarData?.map((item) => <NewCar key={item._id} item={item} />)}
           </div>

@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 
 import { axiosPrivate } from "../../interceptors/axios";
-import { getUser } from "./getUserSlice";
+import { getAllUsers, getUser } from "./getUserSlice";
 import { getNewCars } from "./newCarSlice";
 import { getUsedCars } from "./usedCarSlice";
 import { getCarAss } from "./carAssSlice";
@@ -76,6 +76,8 @@ export const loginAsync = createAsyncThunk(
         await dispatch(getUsedCars({ userId }));
 
         await dispatch(getCarAss({ userId }));
+
+        await dispatch(getAllUsers({ userId }));
 
         toast.success(data?.message);
         navigate("/");

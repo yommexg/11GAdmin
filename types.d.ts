@@ -1,11 +1,3 @@
-export interface User {
-  email?: string;
-  phoneNumber?: string;
-  status?: number;
-  username?: string;
-  avatar?: string;
-}
-
 export enum UserRole {
   ADMIN = 5150,
   USER = 2001,
@@ -69,4 +61,23 @@ export interface CarAss {
   status: number;
   itemImage: [string];
   createdAt: string;
+}
+
+interface User {
+  _id: string;
+  email: string;
+  username: string;
+  phoneNumber: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    houseNo: string;
+  };
+  avatar?: string;
+  status: string;
+  role: string;
+  deleteMessage?: string;
+  date: string;
 }

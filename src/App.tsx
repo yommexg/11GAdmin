@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 
-import { getUser } from "./redux/slice/getUserSlice";
+import { getAllUsers, getUser } from "./redux/slice/getUserSlice";
 import { RootState, useAppDispatch } from "./redux/store";
 import { getNewCars } from "./redux/slice/newCarSlice";
 
@@ -62,6 +62,7 @@ function App() {
       dispatch(getNewCars({ userId }));
       dispatch(getUsedCars({ userId }));
       dispatch(getCarAss({ userId }));
+      dispatch(getAllUsers({ userId }));
     }
   }, [dispatch]);
 

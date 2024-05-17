@@ -22,7 +22,7 @@ const CarAss: React.FC = () => {
           <AddCarAss />
         </div>{" "}
         <div className="overflow-y-auto h-[80vh]">
-          <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-y-auto">
+          <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
             {carAssData.length > 0 &&
               carAssData?.map((item) => (
                 <CarItems key={item._id} item={item} />
