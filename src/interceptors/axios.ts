@@ -8,7 +8,7 @@ let accessToken: string | null = null;
 
 const createAxiosPrivate = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: "https://one1gbackend.onrender.com/",
+    baseURL: "http://localhost:5000/",
     withCredentials: true, // if needed
   });
 

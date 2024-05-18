@@ -112,7 +112,7 @@ const UsersTable: React.FC<{ users: User[] }> = ({ users }) => {
               <tr>
                 <th
                   scope="col"
-                  className="sticky left-0 px-5 py-3 rounded-l-lg bg-white text-center text-xs min-w-[30px] font-medium text-black uppercase tracking-wider"
+                  className="px-5 py-3 rounded-l-lg bg-white text-center text-xs min-w-[30px] font-medium text-black uppercase tracking-wider"
                 >
                   #
                 </th>
@@ -149,13 +149,10 @@ const UsersTable: React.FC<{ users: User[] }> = ({ users }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className="relative">
+            <tbody>
               {users.map((user, index) => (
                 <tr key={user.email}>
-                  <td className="sticky left-0 z-50 px-3 py-2 text-sm text-center">
-                    {index + 1}
-                  </td>
-
+                  <td className="px-3 py-2 text-sm text-center">{index + 1}</td>
                   <td className="px-3 my-3 py-2 text-sm flex gap-2 md:gap-5 items-center">
                     <div className="w-[50px] cursor-pointer">
                       <img
