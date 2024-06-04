@@ -66,7 +66,7 @@ export const sidebarData = [
   },
 
   {
-    name: "Car Assesories",
+    name: "Car Accessories",
     link: "/car-ass",
     link2: "/car-ass/*",
     imgSrc: carAssImg,

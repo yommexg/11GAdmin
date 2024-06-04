@@ -80,4 +80,8 @@ interface User {
   role: string;
   deleteMessage?: string;
   date: string;
+  document?: {
+    name: string;
+    file: string;
+  };
 }

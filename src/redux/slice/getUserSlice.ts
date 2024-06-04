@@ -53,7 +53,7 @@ export const getAllUsers = createAsyncThunk(
     try {
       dispatch(getUserRequest());
       const { data } = await axiosPrivate.get(`users/${userId}`);
-      // console.log(data);
+      console.log(data);
       dispatch(getAllUsersSuccessful(data));
     } catch (error) {
       console.log("Get All Users Error", error);
@@ -77,7 +77,8 @@ export const updateUserStatus = createAsyncThunk(
       userId,
       email,
       status,
-    }: { userId: string; email: string; status: number },
+      reason,
+    }: { userId: string; email: string; status: number; reason?: string },
     { dispatch, rejectWithValue }
   ) => {
     try {
@@ -85,6 +86,7 @@ export const updateUserStatus = createAsyncThunk(
       await axiosPrivate.patch(`update-user-status/${userId}`, {
         email,
         status,
+        reason,
       });
 
       dispatch(getAllUsers({ userId }));

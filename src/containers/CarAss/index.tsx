@@ -18,7 +18,7 @@ const CarAss: React.FC = () => {
       <Navbar />
       <div className="md:ml-[250px] bg-white">
         <div className=" mb-2 px-4 py-3 md:py-6 md:px-8 flex items-center justify-between bg-white shadow-2xl ">
-          <h2 className="font-bold text-2xl">Car Assesories</h2>
+          <h2 className="font-bold text-2xl">Car Accessories</h2>
           <AddCarAss />
         </div>{" "}
         <div className="overflow-y-auto h-[80vh]">
