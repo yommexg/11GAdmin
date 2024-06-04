@@ -28,10 +28,10 @@ const usersImg = new URL(
   import.meta.url
 ).href;
 
-const orderImg = new URL(
-  "../../assets/sidebarImages/order.png",
-  import.meta.url
-).href;
+// const orderImg = new URL(
+//   "../../assets/sidebarImages/order.png",
+//   import.meta.url
+// ).href;
 
 const settingsImg = new URL(
   "../../assets/sidebarImages/settings.png",
@@ -78,11 +78,11 @@ export const sidebarData = [
     imgSrc: usersImg,
   },
 
-  {
-    name: "Orders",
-    link: "/orders",
-    imgSrc: orderImg,
-  },
+  // {
+  //   name: "Orders",
+  //   link: "/orders",
+  //   imgSrc: orderImg,
+  // },
 
   {
     name: "Settings",

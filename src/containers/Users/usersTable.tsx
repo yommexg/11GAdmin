@@ -221,7 +221,7 @@ const UsersTable: React.FC<{ users: User[] }> = ({ users }) => {
                       ""
                     ) : (
                       <p
-                        className="font-semibold text-sm sm:text-base flex items-center gap-2"
+                        className="font-semibold text-right text-sm sm:text-base flex justify-center items-center gap-2"
                         style={{
                           color: statusColor[user.status as unknown as number],
                         }}
