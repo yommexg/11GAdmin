@@ -25,11 +25,11 @@ export const logoutAsync = createAsyncThunk(
     try {
       dispatch(getLogoutRequest());
 
+      await localStorage.removeItem("accessToken");
+
       const { data } = await axiosPrivate.get("logout", {
         withCredentials: true,
       });
-
-      localStorage.removeItem("accessToken");
 
       axiosPrivate.defaults.headers.common["Authorization"] = "";
 
@@ -52,6 +52,7 @@ export const logoutAsync = createAsyncThunk(
 
       dispatch(getLogoutComplete());
       toast.error(errorMessage);
+
       return rejectWithValue({ message: errorMessage });
     }
   }
