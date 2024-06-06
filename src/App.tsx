@@ -9,7 +9,6 @@ import { getNewCars } from "./redux/slice/newCarSlice";
 
 import Home from "./containers/Home";
 import Login from "./containers/Login";
-import SellCarRequest from "./containers/SellCar";
 import UsedCar from "./containers/UsedCar";
 import CarAss from "./containers/CarAss";
 import Order from "./containers/Order";
@@ -79,7 +78,6 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={[5150]} />}>
           <Route path="/" element={<Home />} />
-          <Route path="/sell-car" element={<SellCarRequest />} />
           <Route path="/new-cars" element={<NewCars />} />
           <Route path="/used-cars" element={<UsedCar />} />
           <Route path="/car-ass" element={<CarAss />} />

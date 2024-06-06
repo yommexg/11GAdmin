@@ -40,6 +40,26 @@ const CarItems: React.FC<{ item: CarAssType }> = ({ item }) => {
     currency: "NGN",
   }).format(item?.price);
 
+  const formatDate = (dateString: string) => {
+    const dateObject = new Date(dateString);
+
+    const utcOffsetHours = 1;
+
+    const watDateObject = new Date(
+      dateObject.getTime() + utcOffsetHours * 60 * 60 * 1000
+    );
+
+    const formattedDateTime = watDateObject.toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit", // Include hours in 2-digit format
+      minute: "2-digit", // Include minutes in 2-digit format
+    });
+
+    return formattedDateTime;
+  };
+
   return (
     <div className="bg-gray-100 p-4 w-[150px] md:w-[300px] md:max-h-[400px] md:p-8 rounded-md">
       <div className="mb-4">
@@ -55,6 +75,9 @@ const CarItems: React.FC<{ item: CarAssType }> = ({ item }) => {
         </h2>
         <p className="text-blue-700 italic text-[9px] md:text-xs font-semibold">
           {formattedPrice}{" "}
+        </p>
+        <p className="text-[9px] font-semibold">
+          {formatDate(item?.createdAt)}
         </p>
       </div>
 

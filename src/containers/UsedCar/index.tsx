@@ -13,6 +13,13 @@ const UsedCars: React.FC = () => {
     (state: RootState) => state.usedCar.usedCarsData as UsedCarType[]
   );
 
+  const sortedCarData = usedCarData.slice().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+
+    return dateB.getTime() - dateA.getTime();
+  });
+
   return (
     <div>
       <Sidebar />
@@ -24,8 +31,8 @@ const UsedCars: React.FC = () => {
         </div>
         <div className="overflow-y-auto h-[80vh]">
           <div className="flex flex-wrap justify-center gap-8 px-2 py-4 overflow-x-hidden">
-            {usedCarData.length > 0 &&
-              usedCarData?.map((item) => (
+            {sortedCarData.length > 0 &&
+              sortedCarData?.map((item) => (
                 <UsedCar key={item._id} item={item} />
               ))}
           </div>
