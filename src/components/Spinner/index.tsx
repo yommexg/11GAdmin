@@ -3,7 +3,7 @@ const logoImage = new URL("../../assets/logo/11GLogo.png", import.meta.url)
 
 const Spinner: React.FC = () => {
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-60 z-50">
+    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-white bg-opacity-100 z-50">
       <img
         src={logoImage}
         alt="Loading..."
