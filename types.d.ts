@@ -63,18 +63,20 @@ export interface CarAss {
   createdAt: string;
 }
 
+export interface Address {
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  houseNo: string;
+}
+
 interface User {
   _id: string;
   email: string;
   username: string;
   phoneNumber: string;
-  address: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    houseNo: string;
-  };
+  address: Address;
   avatar?: string;
   status: string;
   role: string;

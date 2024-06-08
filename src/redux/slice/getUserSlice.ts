@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 
 import { axiosPrivate } from "../../interceptors/axios";
+import { toast } from "react-toastify";
+import { Address } from "../../../types";
 
 interface GetUserError {
   message: string;
@@ -16,6 +18,10 @@ interface getUserState {
   userData: object;
   allUsers: object[];
   loading: boolean;
+}
+
+interface FileWithPreview extends File {
+  previewUrl?: string;
 }
 
 export const getUser = createAsyncThunk(
@@ -47,13 +53,110 @@ export const getUser = createAsyncThunk(
   }
 );
 
+export const updateProfPic = createAsyncThunk(
+  "user/profpic",
+  async (
+    {
+      userId,
+      selectedFile,
+      accessToken,
+    }: {
+      userId: string;
+      selectedFile: FileWithPreview;
+      accessToken: string;
+    },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      dispatch(getUserRequest());
+
+      const formData = new FormData();
+
+      formData.append("avatar", selectedFile);
+
+      const { data } = await axiosPrivate.patch(
+        `/upload-avatar/${userId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      // console.log(data);
+      toast.success(data.message);
+
+      await dispatch(getUser({ userId, accessToken }));
+
+      dispatch(getUserComplete());
+    } catch (error) {
+      console.log("Upload Prof Pic", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetUserError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getUserComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+export const updateProfData = createAsyncThunk(
+  "user/profdata",
+  async (
+    {
+      userId,
+      user,
+      phoneNumber,
+      address,
+      accessToken,
+    }: {
+      userId: string;
+      user?: string;
+      phoneNumber?: string;
+      address?: Address;
+      accessToken: string;
+    },
+    { dispatch, rejectWithValue }
+  ) => {
+    try {
+      dispatch(getUserRequest());
+
+      const { data } = await axiosPrivate.patch(`/user/update/${userId}`, {
+        user,
+        phoneNumber,
+        address,
+      });
+      // console.log(data);
+      toast.success(data.message);
+
+      await dispatch(getUser({ userId, accessToken }));
+
+      dispatch(getUserComplete());
+    } catch (error) {
+      console.log("Upload Prof Pic", error);
+      let errorMessage = "An error occurred";
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError<GetUserError>;
+        if (axiosError.response && axiosError.response.data) {
+          errorMessage = axiosError.response.data.message;
+        }
+      }
+      dispatch(getUserComplete());
+      return rejectWithValue({ message: errorMessage });
+    }
+  }
+);
+
 export const getAllUsers = createAsyncThunk(
   "car/getAllUsers",
   async ({ userId }: { userId: string }, { dispatch, rejectWithValue }) => {
     try {
       dispatch(getUserRequest());
+
       const { data } = await axiosPrivate.get(`users/${userId}`);
-      console.log(data);
       dispatch(getAllUsersSuccessful(data));
     } catch (error) {
       console.log("Get All Users Error", error);
@@ -83,15 +186,20 @@ export const updateUserStatus = createAsyncThunk(
   ) => {
     try {
       dispatch(getUserRequest());
-      await axiosPrivate.patch(`update-user-status/${userId}`, {
-        email,
-        status,
-        reason,
-      });
+      const { data } = await axiosPrivate.patch(
+        `update-user-status/${userId}`,
+        {
+          email,
+          status,
+          reason,
+        }
+      );
 
       dispatch(getAllUsers({ userId }));
 
       dispatch(getUserComplete());
+
+      toast.success(data?.message);
     } catch (error) {
       console.log("User Status Update Error", error);
       let errorMessage = "An error occurred";
