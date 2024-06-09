@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 
@@ -88,8 +88,20 @@ function App() {
           <Route path="/new-cars/:newCarId" element={<NewCarDetails />} />
           <Route path="/used-cars/:usedCarId" element={<UsedCarDetails />} />
           <Route path="/car-ass/:carAssId" element={<CarAssDetails />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+    </div>
+  );
+}
+
+function NotFound() {
+  return (
+    <div className="h-[80vh] flex flex-col gap-8 place-content-center text-center items-center">
+      <h1 className="text-3xl font-bold text-red-600">404 - Not Found</h1>
+      <Link to="/" className="bg-[#1B1B1B] text-white px-4 py-2 cursor-pointer">
+        Go to Home Page
+      </Link>
     </div>
   );
 }

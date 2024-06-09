@@ -19,7 +19,7 @@ const usedCarImg = new URL(
 ).href;
 
 const carAssImg = new URL(
-  "../../assets/sidebarImages/car-ass.png",
+  "../../assets/sidebarImages/carAssIcon.jpg",
   import.meta.url
 ).href;
 
