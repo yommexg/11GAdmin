@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { FaPen, FaSave } from "react-icons/fa";
+import { FaArrowLeft, FaPen, FaSave } from "react-icons/fa";
 import { RootState, useAppDispatch } from "../../redux/store";
 import { User } from "../../../types";
 import { updateProfData } from "../../redux/slice/getUserSlice";
@@ -65,7 +65,14 @@ const ProfileData: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center m-4 p-5 border rounded-lg shadow-lg">
+    <div className="flex relative flex-col items-center m-4 p-5 border rounded-lg shadow-lg">
+      {isEditing && (
+        <FaArrowLeft
+          size={22}
+          className="absolute left-4 top-6"
+          onClick={() => setIsEditing(false)}
+        />
+      )}
       <div className="w-full">
         <h2 className="text-lg mb-4 text-center text-blue-600 font-semibold">
           {userData.email}
