@@ -13,12 +13,14 @@ const UsedCars: React.FC = () => {
     (state: RootState) => state.usedCar.usedCarsData as UsedCarType[]
   );
 
-  const sortedCarData = usedCarData.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
+  const sortedCarData = Array.isArray(usedCarData)
+    ? usedCarData.slice().sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
 
-    return dateB.getTime() - dateA.getTime();
-  });
+        return dateB.getTime() - dateA.getTime();
+      })
+    : [];
 
   return (
     <div>

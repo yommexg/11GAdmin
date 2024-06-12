@@ -65,18 +65,26 @@ const ProfileData: React.FC = () => {
   };
 
   return (
-    <div className="flex relative flex-col items-center m-4 p-5 border rounded-lg shadow-lg">
-      {isEditing && (
-        <FaArrowLeft
-          size={22}
-          className="absolute left-4 top-6"
-          onClick={() => setIsEditing(false)}
-        />
-      )}
+    <div className="flex flex-col items-center m-4 p-5 border rounded-lg shadow-lg">
       <div className="w-full">
-        <h2 className="text-lg mb-4 text-center text-blue-600 font-semibold">
-          {userData.email}
-        </h2>
+        {isEditing && (
+          <div className="flex items-center gap-8">
+            <FaArrowLeft
+              size={22}
+              className=""
+              onClick={() => setIsEditing(false)}
+            />
+
+            <h2 className="text-lg text-center text-blue-600 font-semibold">
+              {userData.email}
+            </h2>
+          </div>
+        )}
+        {!isEditing && (
+          <h2 className="text-lg text-center text-blue-600 font-semibold">
+            {userData.email}
+          </h2>
+        )}
         <div className="flex items-center justify-center my-8">
           <div>
             {isEditing ? (

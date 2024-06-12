@@ -12,12 +12,14 @@ const CarAss: React.FC = () => {
     (state: RootState) => state.carAss.carAssData as CarAssType[]
   );
 
-  const sortedCarAssData = carAssData.slice().sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
+  const sortedCarAssData = Array.isArray(carAssData)
+    ? carAssData.slice().sort((a, b) => {
+        const dateA = new Date(a.createdAt);
+        const dateB = new Date(b.createdAt);
 
-    return dateB.getTime() - dateA.getTime();
-  });
+        return dateB.getTime() - dateA.getTime();
+      })
+    : [];
 
   return (
     <div>

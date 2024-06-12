@@ -46,19 +46,25 @@ const HomeCards: React.FC = () => {
         <p className="text-green-600 italic mt-3">
           Availiable:
           <span className="not-italic ml-3   text-black font-semibold">
-            {newCarData.filter((item) => item.status === 1).length}
+            {newCarData.length > 0
+              ? newCarData.filter((item) => item.status === 1).length
+              : 0}
           </span>
         </p>
         <p className="text-yellow-800 italic mt-3">
           Pending:
           <span className="not-italic ml-3   text-black font-semibold">
-            {newCarData.filter((item) => item.status === 0).length}
+            {newCarData.length > 0
+              ? newCarData.filter((item) => item.status === 0).length
+              : 0}
           </span>
         </p>
         <p className="text-red-600 italic mt-3">
           Sold Out:
           <span className="not-italic ml-3   text-black font-semibold">
-            {newCarData.filter((item) => item.status === -1).length}
+            {newCarData.length > 0
+              ? newCarData.filter((item) => item.status === -1).length
+              : 0}
           </span>
         </p>
       </div>
@@ -74,25 +80,33 @@ const HomeCards: React.FC = () => {
         <p className="text-green-600 italic mt-3">
           Availiable:
           <span className="not-italic ml-3   text-black font-semibold">
-            {usedCarData.filter((item) => item.status === 1).length}
+            {usedCarData.length > 0
+              ? usedCarData.filter((item) => item.status === 1).length
+              : 0}
           </span>
         </p>
         <p className="text-yellow-800 italic mt-3">
           Pending:
           <span className="not-italic ml-3   text-black font-semibold">
-            {usedCarData.filter((item) => item.status === 0).length}
+            {usedCarData.length > 0
+              ? usedCarData.filter((item) => item.status === 0).length
+              : 0}
           </span>
         </p>
         <p className="text-red-600 italic mt-3">
           Sold Out:
           <span className="not-italic ml-3   text-black font-semibold">
-            {usedCarData.filter((item) => item.status === -1).length}
+            {usedCarData.length > 0
+              ? usedCarData.filter((item) => item.status === -1).length
+              : 0}
           </span>
         </p>
         <p className="text-purple-600 italic mt-3">
           Decline:
           <span className="not-italic ml-3   text-black font-semibold">
-            {usedCarData.filter((item) => item.status === -2).length}
+            {usedCarData.length > 0
+              ? usedCarData.filter((item) => item.status === -2).length
+              : 0}
           </span>
         </p>
       </div>
@@ -108,19 +122,25 @@ const HomeCards: React.FC = () => {
         <p className="text-green-600 italic mt-3">
           Availiable:
           <span className="not-italic ml-3   text-black font-semibold">
-            {carAssData.filter((item) => item.status === 1).length}
+            {carAssData.length > 0
+              ? carAssData.filter((item) => item.status === 1).length
+              : 0}
           </span>
         </p>
         <p className="text-yellow-800 italic mt-3">
           Pending:
           <span className="not-italic ml-3   text-black font-semibold">
-            {carAssData.filter((item) => item.status === 0).length}
+            {carAssData.length > 0
+              ? carAssData.filter((item) => item.status === 0).length
+              : 0}
           </span>
         </p>
         <p className="text-red-600 italic mt-3">
           Sold Out:
           <span className="not-italic ml-3   text-black font-semibold">
-            {carAssData.filter((item) => item.status === -1).length}
+            {carAssData.length > 0
+              ? carAssData.filter((item) => item.status === -1).length
+              : 0}{" "}
           </span>
         </p>
       </div>
@@ -136,54 +156,56 @@ const HomeCards: React.FC = () => {
         <p className="text-black italic mt-3">
           Admin:
           <span className="not-italic ml-3   text-black font-semibold">
-            {allUsers.filter((item) => item.role === "Admin").length}
+            {allUsers.length > 0
+              ? allUsers.filter((item) => item.role === "Admin").length
+              : 0}
           </span>
         </p>
         <p className="text-green-600 italic mt-3">
           Seller:
           <span className="not-italic ml-3   text-black font-semibold">
-            {
-              allUsers.filter(
-                (item) =>
-                  item.role === "User" &&
-                  (item.status as unknown as number) === 2
-              ).length
-            }
+            {allUsers.length > 0
+              ? allUsers.filter(
+                  (item) =>
+                    item.role === "User" &&
+                    (item.status as unknown as number) === 2
+                ).length
+              : 0}
           </span>
         </p>
         <p className="text-yellow-800 italic mt-3">
           Request:
           <span className="not-italic ml-3   text-black font-semibold">
-            {
-              allUsers.filter(
-                (item) =>
-                  item.role === "User" &&
-                  (item.status as unknown as number) === 3
-              ).length
-            }
+            {allUsers.length > 0
+              ? allUsers.filter(
+                  (item) =>
+                    item.role === "User" &&
+                    (item.status as unknown as number) === 3
+                ).length
+              : 0}
           </span>
         </p>
         <p className="text-purple-800 italic mt-3">
           Non Seller:
           <span className="not-italic ml-3   text-black font-semibold">
-            {
-              allUsers.filter(
-                (item) =>
-                  item.role === "User" &&
-                  (item.status as unknown as number) === 1
-              ).length
-            }
+            {allUsers.length > 0
+              ? allUsers.filter(
+                  (item) =>
+                    item.role === "User" &&
+                    (item.status as unknown as number) === 1
+                ).length
+              : 0}
           </span>
         </p>
 
         <p className="text-red-600 italic mt-3">
           Suspended:
           <span className="not-italic ml-3   text-black font-semibold">
-            {
-              allUsers.filter(
-                (item) => (item.status as unknown as number) === -1
-              ).length
-            }
+            {allUsers.length > 0
+              ? allUsers.filter(
+                  (item) => (item.status as unknown as number) === -1
+                ).length
+              : 0}
           </span>
         </p>
       </div>

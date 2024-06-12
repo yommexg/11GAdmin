@@ -77,6 +77,7 @@ const ProfilePic: React.FC = () => {
         ref={fileInputRef}
         style={{ display: "none" }}
         onChange={handleFileChange}
+        accept="image/jpeg, image/jpg, image/png"
       />
     </div>
   );
