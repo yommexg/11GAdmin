@@ -272,7 +272,7 @@ const UsersTable: React.FC<{ users: User[] }> = ({ users }) => {
                   <td className="px-3 py-2 text-sm text-center relative">
                     {user.role === "Admin"
                       ? ""
-                      : (user.status as unknown as number) === (2 || 3) &&
+                      : (user.status as unknown as number) !== (2 || 3) &&
                         user.document?.name && (
                           <div
                             className="font-semibold text-sm sm:text-base flex justify-center items-center gap-5 cursor-pointer"
